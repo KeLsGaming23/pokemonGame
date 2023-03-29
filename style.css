@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+}
+
+.section-1 {
+    background-image: url("background.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* .pokedex-conatiner {
+  
+} */
+
+h1 {
+    letter-spacing: 3px;
+}
+
+/* Redundunt */
+/* .pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+   */
+  /* Useless because of bootstrap */
+/* .pokemon {
+    background-color: blue;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  } */
+  
+  .desktop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+  }
+  
+  .mobile-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  /* ------------------------------ */
+  
+  @media (min-width: 768px) {
+    .mobile-grid {
+      display: none;
+    }
+  }
+  /* ------------------------------ */
+  
+  .cell {
+    background-color: black;
+    color: aliceblue;
+    text-transform: uppercase;
+    padding: 10px;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease-in-out;
+    transition: .5s;
+  }
+  
+  .cell:hover {
+    cursor: pointer;
+    background-color: gray;
+    
+
+  }
+
+  
+  
