@@ -109,7 +109,7 @@
   </style>
 </head>
 <body>
-    <img src="header.png" alt="" class="text-center">
+    <center><img src="header.png" alt=""></center>
     <div class="pagination">
         <input type="text" id="search-input" placeholder="Search Pokemon...">
         <button id="search-btn">Search</button>
@@ -173,7 +173,6 @@
         `;
         //Kels Edit add event event click listener in every cell and then save the pokemon ID
         pokemonElement.addEventListener('click', () => {
-            const pokemonData = pokemon.id;
             localStorage.setItem('pokemonId', pokemonData.id);
             location.href = 'pokemonbattle.html';
         });
