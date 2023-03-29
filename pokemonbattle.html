@@ -156,7 +156,7 @@
         damageMessage.style.display = "none";
         // Define the IDs of the two Pokemon we want to battle
         const pokemon1Id = 25; // Opponent Pokemon
-        const pokemon2Id = 200;  // Player Pokemon
+        const pokemon2Id = 1;  // Player Pokemon
         // Use fetch to retrieve information about the Opponent Pokemon
         fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Id}`)
             .then(response => response.json())
@@ -197,54 +197,110 @@
             if (turnInProgress) {
                 return; // if it's not the player's turn, exit the function
             }
+            // Use fetch to retrieve information about the Player Pokemon
+            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon2Id}`)
+                .then(response => response.json())
+                .then(playerData => {
+                    // Set minimum and maximum damage values
+                    let playerMinDamage = playerData.stats[5].base_stat;
+                    let playerMaxDamage = playerData.stats[5].base_stat + 5;
+                    // Use fetch to retrieve information about the Opponent Pokemon
+                    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Id}`)
+                        .then(response => response.json())
+                        .then(opponentData => {
+                            let opponentMinDefense = opponentData.stats[4].base_stat;
+                            let opponentMaxDefense = opponentData.stats[4].base_stat + 20;
+                            let opponentDefense = (opponentMinDefense + opponentMaxDefense) / 2;
+                            // Calculate random damage within the range
+                            let damage = Math.floor(Math.random() * (playerMaxDamage - playerMinDamage + 1)) + playerMinDamage;
+                            damage = Math.round(damage * (1 - opponentDefense / 100));
 
-            // Set minimum and maximum damage values
-            let minDamage = 5;
-            let maxDamage = 20;
+                            // Get the current width of the progress bar
+                            let currentWidth = parseInt(opponentProgressBar.style.width, 10);
 
-            // Calculate random damage within the range
-            let damage = Math.floor(Math.random() * (maxDamage - minDamage + 1)) + minDamage;
-
-            // Get the current width of the progress bar
-            var currentWidth = parseInt(opponentProgressBar.style.width, 10);
-
-            // Subtract the random damage from the current width
-            var newWidth = currentWidth - damage;
-
-            // Check if opponent HP has reached zero
-            if (newWidth <= 0) {
-                opponentProgressBar.style.width = "0%";
-                // Opponent has been defeated
-                // Add code here to handle the defeat
-            } else {
-                // Update the width of the progress bar
-                opponentProgressBar.style.width = newWidth + "%";
-                turnInProgress = true;
-                setTimeout(function () {
-                    damagePlayer();
-                    turnInProgress = false;
-                }, 700);
-            }
-            // damageMessage.style.display = "block";
-            // console.log("Damage Logic Enter here");
+                            // Subtract the random damage from the current width
+                            let newWidth = currentWidth - damage;
+                            damageMessage.style.display = "block";
+                            damageMessage.innerHTML = `${playerData.moves[0].move.name}`;
+                            console.log("Damage Logic Enter here");
+                            // Check if opponent HP has reached zero
+                            if (newWidth <= 0) {
+                                opponentProgressBar.style.width = "0%";
+                                // Opponent has been defeated
+                                damageMessage.style.display = "block";
+                                damageMessage.innerHTML = "You Win";
+                                console.log("Damage Logic Enter here");
+                            } else {
+                                // Update the width of the progress bar
+                                opponentProgressBar.style.width = newWidth + "%";
+                                turnInProgress = true;
+                                // Show the damage message and then hide it after 700ms
+                                setTimeout(function () {
+                                    damageMessage.style.display = "none";
+                                    console.log("Damage Message Hide");
+                                }, 600);
+                                setTimeout(function () {
+                                    damagePlayer();
+                                }, 700);
+                            }
+                        })
+                        .catch(error => {
+                            console.error(`Error retrieving Pokemon data: ${error}`);
+                        });
+                })
+                .catch(error => {
+                    console.error(`Error retrieving Pokemon data: ${error}`);
+                });
         }
         function damagePlayer() {
-            // Set minimum and maximum damage values
-            let pminDamage = 5;
-            let pmaxDamage = 20;
-            // Calculate random damage within the range
-            let pdamage = Math.floor(Math.random() * (pmaxDamage - pminDamage + 1)) + pminDamage;
-            var playerCurrentWidth = parseInt(playerProgressBar.style.width, 10);
-            var playerNewWidth = playerCurrentWidth - pdamage;
-            if (playerNewWidth <= 0) {
-                playerProgressBar.style.width = "0%";
-                // Opponent has been defeated
-                // Add code here to handle the defeat
-            } else {
-                // Update the width of the progress bar
-                playerProgressBar.style.width = playerNewWidth + "%";
-                setTimeout(turnInProgress = true, 700);
-            }
+            // Use fetch to retrieve information about the Opponent Pokemon
+            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Id}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Set minimum and maximum damage values
+                    let opponentMinDamage = data.stats[5].base_stat;
+                    let opponentMaxDamage = data.stats[5].base_stat + 5;
+                    // Use fetch to retrieve information about the Player Pokemon
+                    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon2Id}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let playerMinDefense = data.stats[4].base_stat;
+                            let playerMaxDefense = data.stats[4].base_stat + 20;
+                            let playerDefense = (playerMinDefense + playerMaxDefense) / 2;
+                            // Calculate random damage within the range
+                            let pdamage = Math.floor(Math.random() * (opponentMaxDamage - opponentMinDamage + 1)) + opponentMinDamage;
+                            pdamage = Math.round(pdamage * (1 - playerDefense / 100));
+                            let playerCurrentWidth = parseInt(playerProgressBar.style.width, 10);
+                            let playerNewWidth = playerCurrentWidth - pdamage;
+                            damageMessage.style.display = "block";
+                            console.log("Damage Logic Enter here");
+                            if (playerNewWidth <= 0) {
+                                playerProgressBar.style.width = "0%";
+                                // Opponent has been defeated
+                                damageMessage.style.display = "block";
+                                damageMessage.innerHTML = "You Lose";
+                                console.log("Damage Logic Enter here");
+                            } else {
+                                // Update the width of the progress bar
+                                playerProgressBar.style.width = playerNewWidth + "%";
+                                // Show the damage message and then hide it after 700ms
+                                setTimeout(function () {
+                                    damageMessage.style.display = "none";
+                                    console.log("Damage Message Hide");
+                                }, 600);
+                                // Set the turnInProgress to true after 700ms
+                                setTimeout(function () {
+                                    turnInProgress = false;
+                                }, 700);
+                            }
+                        })
+                        .catch(error => {
+                            console.error(`Error retrieving Pokemon data: ${error}`);
+                        });
+                })
+                .catch(error => {
+                    console.error(`Error retrieving Pokemon data: ${error}`);
+                });
         }
     </script>
 </body>
