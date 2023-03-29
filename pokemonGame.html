@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Define the IDs of the two Pokemon we want to battle
+        const pokemon1Id = 25; // Pikachu
+        const pokemon2Id = 6;  // Charizard
+
+        // Use fetch to retrieve information about the first Pokemon
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Id}`)
+            .then(response => response.json())
+            .then(data => {
+                // Create a new HTML element to display the Pokemon's information
+                const pokemon1Info = document.createElement('div');
+
+                // Set the class of the element for styling purposes
+                pokemon1Info.classList.add('pokemon-info');
+
+                // Set the inner HTML of the element to display the Pokemon's name, image, and stats
+                pokemon1Info.innerHTML = `
+      <h2>${data.name}</h2>
+      <img src="${data.sprites.front_default}">
+      <ul>
+        <li>Type: ${data.types[0].type.name}</li>
+        <li>HP: ${data.stats[0].base_stat}</li>
+        <li>Attack: ${data.stats[1].base_stat}</li>
+        <li>Defense: ${data.stats[2].base_stat}</li>
+        <li>Special Attack: ${data.stats[3].base_stat}</li>
+        <li>Special Defense: ${data.stats[4].base_stat}</li>
+        <li>Speed: ${data.stats[5].base_stat}</li>
+      </ul>
+    `;
+
+                // Add the element to the page
+                document.body.appendChild(pokemon1Info);
+            })
+            .catch(error => {
+                console.error(`Error retrieving Pokemon data: ${error}`);
+            });
+
+        // Use fetch to retrieve information about the second Pokemon
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon2Id}`)
+            .then(response => response.json())
+            .then(data => {
+                // Create a new HTML element to display the Pokemon's information
+                const pokemon2Info = document.createElement('div');
+
+                // Set the class of the element for styling purposes
+                pokemon2Info.classList.add('pokemon-info');
+
+                // Set the inner HTML of the element to display the Pokemon's name, image, and stats
+                pokemon2Info.innerHTML = `
+                    <h2>${data.name}</h2>
+                    <img src="${data.sprites.front_default}">
+                    <ul>
+                        <li>Type: ${data.types[0].type.name}</li>
+                        <li>HP: ${data.stats[0].base_stat}</li>
+                        <li>Attack: ${data.stats[1].base_stat}</li>
+                        <li>Defense: ${data.stats[2].base_stat}</li>
+                        <li>Special Attack: ${data.stats[3].base_stat}</li>
+                        <li>Special Defense: ${data.stats[4].base_stat}</li>
+                        <li>Speed: ${data.stats[5].base_stat}</li>
+                    </ul>
+                    `;
+
+                // Add the element to the page
+                document.body.appendChild(pokemon2Info);
+            })
+            .catch(error => {
+                console.error(`Error retrieving Pokemon data: ${error}`);
+            });
+
+    </script>
+</body>
+
+</html>
