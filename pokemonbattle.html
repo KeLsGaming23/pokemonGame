@@ -190,6 +190,37 @@
             });
         //Battle System Logic
         function getAttack() {
+            if (turnInProgress) {
+                return; // if it's not the player's turn, exit the function
+            }
+
+            // Set minimum and maximum damage values
+            let minDamage = 5;
+            let maxDamage = 20;
+
+            // Calculate random damage within the range
+            let damage = Math.floor(Math.random() * (maxDamage - minDamage + 1)) + minDamage;
+
+            // Get the current width of the progress bar
+            var currentWidth = parseInt(opponentProgressBar.style.width, 10);
+
+            // Subtract the random damage from the current width
+            var newWidth = currentWidth - damage;
+
+            // Check if opponent HP has reached zero
+            if (newWidth <= 0) {
+                opponentProgressBar.style.width = "0%";
+                // Opponent has been defeated
+                // Add code here to handle the defeat
+            } else {
+                // Update the width of the progress bar
+                opponentProgressBar.style.width = newWidth + "%";
+                turnInProgress = true;
+                setTimeout(function () {
+                    damagePlayer();
+                    turnInProgress = false;
+                }, 700);
+            }
             damageMessage.style.display = "block";
             console.log("Damage Logic Enter here");
         }
