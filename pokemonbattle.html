@@ -22,12 +22,15 @@
             justify-content: center;
             align-items: center;
         }
-        .opponent-side{
+
+        .opponent-side {
             width: 20%;
         }
-        .opponent-info{
+
+        .opponent-info {
             transform: translateX(80%);
         }
+
         .move-set-holder {
             position: absolute;
             bottom: 0;
@@ -43,7 +46,8 @@
         .progress {
             height: 10%;
         }
-        .damage-message{
+
+        .damage-message {
             /* display: none; */
             width: 400px;
             top: 120px;
@@ -102,8 +106,8 @@
             <div class="container-xxl">
                 <h3 id="player-pokemon"></h3>
             </div>
-            <div class="progress" role="progressbar" aria-label="Success example"
-                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100">
                 <div id="player-progress-bar" class="progress-bar bg-success" style="width: 100%">100%</div><br>
                 <div
                     class="move-set-holder border p-4  mx-2 my-2 gap-2 d-md-flex justify-content-md-center align-items-center">
@@ -221,8 +225,26 @@
                     turnInProgress = false;
                 }, 700);
             }
-            damageMessage.style.display = "block";
-            console.log("Damage Logic Enter here");
+            // damageMessage.style.display = "block";
+            // console.log("Damage Logic Enter here");
+        }
+        function damagePlayer() {
+            // Set minimum and maximum damage values
+            let pminDamage = 5;
+            let pmaxDamage = 20;
+            // Calculate random damage within the range
+            let pdamage = Math.floor(Math.random() * (pmaxDamage - pminDamage + 1)) + pminDamage;
+            var playerCurrentWidth = parseInt(playerProgressBar.style.width, 10);
+            var playerNewWidth = playerCurrentWidth - pdamage;
+            if (playerNewWidth <= 0) {
+                playerProgressBar.style.width = "0%";
+                // Opponent has been defeated
+                // Add code here to handle the defeat
+            } else {
+                // Update the width of the progress bar
+                playerProgressBar.style.width = playerNewWidth + "%";
+                setTimeout(turnInProgress = true, 700);
+            }
         }
     </script>
 </body>
