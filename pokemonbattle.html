@@ -112,13 +112,13 @@
                 <div
                     class="move-set-holder border p-4  mx-2 my-2 gap-2 d-md-flex justify-content-md-center align-items-center">
                     <button id="first-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                        onclick="getAttack()"></button>
+                        onclick="getAttack(0)"></button>
                     <button id="second-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                        onclick="getAttack()"></button>
+                        onclick="getAttack(1)"></button>
                     <button id="third-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                        onclick="getAttack()"></button>
+                        onclick="getAttack(2)"></button>
                     <button id="fourth-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                        onclick="getAttack()"></button>
+                        onclick="getAttack(3)"></button>
                 </div>
 
             </div>
@@ -193,7 +193,7 @@
                 console.error(`Error retrieving Pokemon data: ${error}`);
             });
         //Battle System Logic
-        function getAttack() {
+        function getAttack(moveNumber) {
             if (turnInProgress) {
                 return; // if it's not the player's turn, exit the function
             }
@@ -221,7 +221,7 @@
                             // Subtract the random damage from the current width
                             let newWidth = currentWidth - damage;
                             damageMessage.style.display = "block";
-                            damageMessage.innerHTML = `${playerData.moves[0].move.name}`;
+                            damageMessage.innerHTML = `${playerData.name} used ${playerData.moves[moveNumber].move.name}`;
                             console.log("Damage Logic Enter here");
                             // Check if opponent HP has reached zero
                             if (newWidth <= 0) {
@@ -238,10 +238,10 @@
                                 setTimeout(function () {
                                     damageMessage.style.display = "none";
                                     console.log("Damage Message Hide");
-                                }, 600);
+                                }, 800);
                                 setTimeout(function () {
                                     damagePlayer();
-                                }, 700);
+                                }, 1000);
                             }
                         })
                         .catch(error => {
@@ -256,16 +256,17 @@
             // Use fetch to retrieve information about the Opponent Pokemon
             fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Id}`)
                 .then(response => response.json())
-                .then(data => {
+                .then(opponentData => {
                     // Set minimum and maximum damage values
-                    let opponentMinDamage = data.stats[5].base_stat;
-                    let opponentMaxDamage = data.stats[5].base_stat + 5;
+                    let opponentMinDamage = opponentData.stats[5].base_stat;
+                    let opponentMaxDamage = opponentData.stats[5].base_stat + 5;
                     // Use fetch to retrieve information about the Player Pokemon
                     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon2Id}`)
                         .then(response => response.json())
-                        .then(data => {
-                            let playerMinDefense = data.stats[4].base_stat;
-                            let playerMaxDefense = data.stats[4].base_stat + 20;
+                        .then(playerData => {
+                            let randomMove = Math.floor(Math.random() * 4);
+                            let playerMinDefense = playerData.stats[4].base_stat;
+                            let playerMaxDefense = playerData.stats[4].base_stat + 20;
                             let playerDefense = (playerMinDefense + playerMaxDefense) / 2;
                             // Calculate random damage within the range
                             let pdamage = Math.floor(Math.random() * (opponentMaxDamage - opponentMinDamage + 1)) + opponentMinDamage;
@@ -273,6 +274,7 @@
                             let playerCurrentWidth = parseInt(playerProgressBar.style.width, 10);
                             let playerNewWidth = playerCurrentWidth - pdamage;
                             damageMessage.style.display = "block";
+                            damageMessage.innerHTML = `${opponentData.name} used ${opponentData.moves[randomMove].move.name}`;
                             console.log("Damage Logic Enter here");
                             if (playerNewWidth <= 0) {
                                 playerProgressBar.style.width = "0%";
@@ -287,7 +289,7 @@
                                 setTimeout(function () {
                                     damageMessage.style.display = "none";
                                     console.log("Damage Message Hide");
-                                }, 600);
+                                }, 1000);
                                 // Set the turnInProgress to true after 700ms
                                 setTimeout(function () {
                                     turnInProgress = false;
