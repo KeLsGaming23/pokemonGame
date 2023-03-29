@@ -138,6 +138,9 @@
         //Declare Variables
         let turnInProgress = false;
 
+        // Retrieve player and opponent HP from localStorage
+        let playerHP = localStorage.getItem("playerHP");
+        let computerHP = localStorage.getItem("computerHP");
         //Select HTML Elements
         const opponentPokemonName = document.getElementById('opponent-pokemon');
         let opponentProgressBar = document.getElementById('opponent-progress-bar');
@@ -157,6 +160,17 @@
         // Define the IDs of the two Pokemon we want to battle
         const pokemon1Id = 25; // Opponent Pokemon
         const pokemon2Id = 1;  // Player Pokemon
+        // Set initial player and opponent HP as the width of the progress bars
+        if (playerHP) {
+            playerProgressBar.style.width = playerHP;
+        } else {
+            playerProgressBar.style.width = "100%";
+        }
+        if (computerHP) {
+            opponentProgressBar.style.width = computerHP;
+        } else {
+            opponentProgressBar.style.width = "100%";
+        }
         // Use fetch to retrieve information about the Opponent Pokemon
         fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Id}`)
             .then(response => response.json())
@@ -220,6 +234,7 @@
 
                             // Subtract the random damage from the current width
                             let newWidth = currentWidth - damage;
+                            localStorage.setItem("computerHP", newWidth + "%");
                             damageMessage.style.display = "block";
                             damageMessage.innerHTML = `${playerData.name} used ${playerData.moves[moveNumber].move.name}`;
                             console.log("Damage Logic Enter here");
@@ -230,6 +245,8 @@
                                 damageMessage.style.display = "block";
                                 damageMessage.innerHTML = "You Win";
                                 console.log("Damage Logic Enter here");
+                                localStorage.removeItem("playerHP");
+                                localStorage.removeItem("computerHP");
                             } else {
                                 // Update the width of the progress bar
                                 opponentProgressBar.style.width = newWidth + "%";
@@ -273,6 +290,7 @@
                             pdamage = Math.round(pdamage * (1 - playerDefense / 100));
                             let playerCurrentWidth = parseInt(playerProgressBar.style.width, 10);
                             let playerNewWidth = playerCurrentWidth - pdamage;
+                            localStorage.setItem("playerHP", playerNewWidth + "%");
                             damageMessage.style.display = "block";
                             damageMessage.innerHTML = `${opponentData.name} used ${opponentData.moves[randomMove].move.name}`;
                             console.log("Damage Logic Enter here");
@@ -282,6 +300,8 @@
                                 damageMessage.style.display = "block";
                                 damageMessage.innerHTML = "You Lose";
                                 console.log("Damage Logic Enter here");
+                                localStorage.removeItem("playerHP");
+                                localStorage.removeItem("computerHP");
                             } else {
                                 // Update the width of the progress bar
                                 playerProgressBar.style.width = playerNewWidth + "%";
