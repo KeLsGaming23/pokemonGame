@@ -141,6 +141,8 @@
         // Retrieve player and opponent HP from localStorage
         let playerHP = localStorage.getItem("playerHP");
         let computerHP = localStorage.getItem("computerHP");
+        // Retrieve player pokemon ID
+        let playerPokemon = localStorage.getItem("pokemonId");
         //Select HTML Elements
         const opponentPokemonName = document.getElementById('opponent-pokemon');
         let opponentProgressBar = document.getElementById('opponent-progress-bar');
@@ -159,7 +161,7 @@
         damageMessage.style.display = "none";
         // Define the IDs of the two Pokemon we want to battle
         const pokemon1Id = 25; // Opponent Pokemon
-        const pokemon2Id = 1;  // Player Pokemon
+        const pokemon2Id = playerPokemon;  // Player Pokemon
         // Set initial player and opponent HP as the width of the progress bars
         if (playerHP) {
             playerProgressBar.style.width = playerHP;
@@ -247,6 +249,7 @@
                                 console.log("Damage Logic Enter here");
                                 localStorage.removeItem("playerHP");
                                 localStorage.removeItem("computerHP");
+                                localStorage.removeItem("pokemonId");
                             } else {
                                 // Update the width of the progress bar
                                 opponentProgressBar.style.width = newWidth + "%";
@@ -302,6 +305,7 @@
                                 console.log("Damage Logic Enter here");
                                 localStorage.removeItem("playerHP");
                                 localStorage.removeItem("computerHP");
+                                localStorage.removeItem("pokemonId");
                             } else {
                                 // Update the width of the progress bar
                                 playerProgressBar.style.width = playerNewWidth + "%";

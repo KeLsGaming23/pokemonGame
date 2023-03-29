@@ -55,10 +55,15 @@
    crossorigin="anonymous"></script>
 
     <script>
+    //Retrieve playerPokemonFirst
+    let playerPokemon = localStorage.getItem("pokemonId");
+    if(playerPokemon){
+        location.href = "pokemonbattle.html";
+    }
     // Load more or somethings else
         function relocate_home()
             {
-                location.href = "www.sampl.com";
+                location.href = "index.html";
             } 
         
     // PokeDex Area Declare Variables
@@ -69,12 +74,17 @@
         .then(response => response.json())
         .then(data => {
             data.results.forEach(async pokemon => {
-    // fetch more data about the Pokemon 
+            // fetch more data about the Pokemon 
             const pokemonData = await fetch(pokemon.url).then(response => response.json());
-    // When the response is received
+            // When the response is received
             const pokemonElement = document.createElement('div',);
             pokemonElement.classList.add('pokemon', 'cell');
-    // element for the sprite and Set the appropriate properties
+            //Kels Edit add event event click listener in every cell and then save the pokemon ID
+            pokemonElement.addEventListener('click', () => {
+                localStorage.setItem('pokemonId', pokemonData.id);
+                location.href = 'pokemonbattle.html';
+            });
+            // element for the sprite and Set the appropriate properties
             const pokemonName = document.createElement('h2');
             pokemonName.innerText = pokemonData.name;
             
