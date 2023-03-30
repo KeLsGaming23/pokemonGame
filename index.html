@@ -172,8 +172,9 @@
 
         `;
         //Kels Edit add event event click listener in every cell and then save the pokemon ID
+        let pokemonData = `${pokemonId}`;
         pokemonElement.addEventListener('click', () => {
-            localStorage.setItem('pokemonId', pokemonData.id);
+            localStorage.setItem('pokemonId', pokemonData);
             location.href = 'pokemonbattle.html';
         });
 
