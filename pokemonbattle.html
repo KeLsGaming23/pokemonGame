@@ -25,9 +25,11 @@
         }
 
         .opponent-side {
-            width: 20%;
+            width: 10%;
         }
-
+        .player-side {
+            width: 10%;
+        }
         .opponent-info {
             transform: translateX(80%);
         }
@@ -188,7 +190,7 @@
                 //Set Pokemon Sprite
                 opponentSprite.innerHTML =
                     `<img alt="Rival Pokemon" class="pokemon-sprite" 
-                    src="${data.sprites.front_default}">`;
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon1Id}.png">`;
             })
             .catch(error => {
                 console.error(`Error retrieving Pokemon data: ${error}`);
@@ -204,7 +206,7 @@
                 //Set Pokemon Sprite
                 playerSprite.innerHTML =
                     `<img alt="Player Pokemon" class="pokemon-sprite" 
-                    src="${data.sprites.back_default}">`;
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokemon2Id}.png">`;
                 moveSetOne.innerText = data.moves[0].move.name;
                 moveSetTwo.innerText = data.moves[1].move.name;
                 moveSetThree.innerText = data.moves[2].move.name;
