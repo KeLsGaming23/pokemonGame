@@ -28,13 +28,14 @@
           var username = $('#username').val();
           var password = $('#password').val();
           $.ajax({
-            url: 'https://kelsgaming23.github.io/pokemonGame/get_login_token.php',
+            url: 'get_login_token.php',
             data: {
               username: username,
               password: password
             },
             success: function(token) {
               console.log(token);
+              console.log("check token");
               // Do something with the login token, such as storing it in a cookie or session variable
             }
           });
