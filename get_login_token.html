@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Get Login Token</title>
+  </head>
+  <body>
+    <h1>Get Login Token</h1>
+    <form id="login-form">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+      </div>
+      <div>
+        <button type="submit">Get Token</button>
+      </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(function() {
+        $('#login-form').submit(function(e) {
+          e.preventDefault();
+          var username = $('#username').val();
+          var password = $('#password').val();
+          $.ajax({
+            url: 'https://kelsgaming23.github.io/pokemonGame/get_login_token.php',
+            data: {
+              username: username,
+              password: password
+            },
+            success: function(token) {
+              console.log(token);
+              // Do something with the login token, such as storing it in a cookie or session variable
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
