@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <title>PokeDexGo</title>
   <style>
@@ -13,7 +14,7 @@
       font-family: Arial, sans-serif;
       background-color: #f0f0f0;
     }
-    
+
     #pokemon-container {
       display: flex;
       flex-wrap: wrap;
@@ -22,7 +23,7 @@
       margin: 0 auto;
       padding: 20px;
     }
-    
+
     .pokemon {
       display: flex;
       flex-direction: column;
@@ -34,26 +35,26 @@
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    
+
     .pokemon img {
       width: 200px;
       height: 200px;
       margin-bottom: 10px;
     }
-    
+
     .pokemon h3 {
       margin: 0;
       font-size: 18px;
       text-align: center;
       text-transform: capitalize;
     }
-    
+
     .pagination {
       display: flex;
       justify-content: center;
       margin-top: 20px;
     }
-    
+
     .pagination button {
       font-size: 16px;
       padding: 10px 20px;
@@ -64,18 +65,18 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       cursor: pointer;
     }
-    
+
     .pagination button:hover {
       background-color: #f0f0f0;
     }
 
     input[type="text"] {
-        padding: 5px;
-        margin-right: 10px;
-        width: 20%;
+      padding: 5px;
+      margin-right: 10px;
+      width: 20%;
     }
 
-      /* button {
+    /* button {
         padding: 5px;
         cursor: pointer;
       } */
@@ -85,51 +86,182 @@
     } */
 
     .popup {
-        position: fixed;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        top:30%;
-        left:0;
-        width: 20%;
-        color: #fff;
-        cursor:pointer;
-        background-color: rgba(0, 0, 0, 0.568);
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        z-index: 1;
-    }
-    .pokemon:hover {
-        cursor: pointer;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      top: 30%;
+      left: 0;
+      width: 20%;
+      color: #fff;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.568);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      z-index: 1;
     }
 
+    .pokemon:hover {
+      cursor: pointer;
+    }
+
+    /* LeaderBoard Style */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
   </style>
 </head>
+
 <body>
-    <center><img src="header.png" alt=""></center>
-    <div class="pagination">
-        <input type="text" id="search-input" placeholder="Search Pokemon...">
-        <button id="search-btn">Search</button>
+  <center><img src="header.png" alt=""></center>
+  <button type="button" class="btn btn-primary" onclick="showLeaderboard()">Show Leaderboard</button>
+  <button type="button" class="btn btn-primary" onclick="hideLeaderboard()">Hide Leaderboard</button>
+  <button type="button" class="btn btn-primary" onclick="addScore()">Add Score</button>
+  <button class="btn btn-danger" onclick="resetLocalStorage()">Reset Local Storage</button>
+  <!-- Button to trigger the modal -->
+  <button id="modalBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Login
+  </button>
+
+
+  <div id="leaderboard" style="display: none">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+      <tbody id="leaderboard-body"></tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <input type="text" id="search-input" placeholder="Search Pokemon...">
+    <button id="search-btn">Search</button>
+  </div>
+  <div id="pokemon-container"></div>
+  <div class="pagination">
+    <button id="previous-btn">Previous</button>
+    <button id="next-btn">Next</button><br>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Your Name</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="nameInput" placeholder="Your Name">
+          <button id="submitNameBtn" class="btn btn-primary mt-3">Submit</button>
+          <p id="welcomeMessage"></p>
+        </div>
       </div>
-      <div id="pokemon-container"></div>
-      <div class="pagination">
-        <button id="previous-btn">Previous</button>
-        <button id="next-btn">Next</button><br>
-      </div>
-      
-    <!-- Bootstrap Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    </div>
+  </div>
+
+  <!-- Bootstrap Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
     crossorigin="anonymous"></script>
   <script>
-    let playerName = prompt('Enter your Name:');
-     //Retrieve playerPokemonFirst
+    const modalBtn = document.getElementById('modalBtn');
+
+    // Show the modal upon loading the page
+
+
+    // Hide the modal trigger button
+    modalBtn.classList.add('d-none');
+    // Load the existing scores from localStorage
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+    // Get the modal elements
+    const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    const nameInput = document.getElementById('nameInput');
+    const submitNameBtn = document.getElementById('submitNameBtn');
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    modal.show();
+    // Function to add scores for the user
+    function addScore() {
+      // Ask for the score
+      let score = prompt('Enter your score:');
+
+      // Convert the score to a number
+      score = parseInt(score);
+
+      // Check if the user's name already exists in the scores array
+      let found = false;
+      for (let i = 0; i < scores.length; i++) {
+        if (scores[i].name === nameInput.value) {
+          scores[i].score += score;
+          found = true;
+          break;
+        }
+      }
+
+      // If the name doesn't exist in the scores array, add a new entry
+      if (!found) {
+        scores.push({
+          name: nameInput.value,
+          score: score
+        });
+      }
+
+      // Save the updated scores to localStorage
+      localStorage.setItem('scores', JSON.stringify(scores));
+
+      console.log(`Score added/updated: ${nameInput.value} - ${score}`);
+      console.log(scores);
+    }
+
+    // Add event listener to the button to submit the name
+    submitNameBtn.addEventListener('click', function () {
+      // Store the player's name in localStorage
+      localStorage.setItem('currentPlayer', nameInput.value);
+      // Check if the user's name already exists in the scores array
+      let found = false;
+      for (let i = 0; i < scores.length; i++) {
+        if (scores[i].name === nameInput.value) {
+          welcomeMessage.textContent = `Welcome back, ${nameInput.value}!`;
+          found = true;
+          break;
+        }
+      }
+
+      // If the name doesn't exist in the scores array, greet as new user
+      if (!found) {
+        welcomeMessage.textContent = `Welcome new user, ${nameInput.value}! Have fun playing!`;
+        let score = '0';
+        score = parseInt(score);
+        scores.push({
+          name: nameInput.value,
+          score: score
+        });
+      }
+      localStorage.setItem('scores', JSON.stringify(scores));
+      // Hide the name input and submit button
+      nameInput.style.display = 'none';
+      submitNameBtn.style.display = 'none';
+    });
+    //Retrieve playerPokemonFirst
     let playerPokemon = localStorage.getItem("pokemonId");
-    if(playerPokemon){
-        location.href = "pokemonbattle.html";
+    if (playerPokemon) {
+      location.href = "pokemonbattle.html";
     }
     // Pokemons that will be render
     const numberOfPokemon = 60;
@@ -139,18 +271,18 @@
 
     // Retrieve a random Pokemon ID between 1 and 898
     function getRandomPokemonId() {
-    return Math.floor(Math.random() * 898) + 1;
+      return Math.floor(Math.random() * 898) + 1;
     }
 
     // Fetch the Pokemon data and render it to the DOM and clear the container before rendering new Pokemon
     async function fetchAndRenderPokemon() {
-    const container = document.getElementById('pokemon-container');
-    container.innerHTML = '';
+      const container = document.getElementById('pokemon-container');
+      container.innerHTML = '';
 
-    const searchInput = document.getElementById('search-input');
-    const searchTerm = searchInput.value.trim().toLowerCase();
-    
-    for (let i = 0; i < numberOfPokemon; i++) {
+      const searchInput = document.getElementById('search-input');
+      const searchTerm = searchInput.value.trim().toLowerCase();
+
+      for (let i = 0; i < numberOfPokemon; i++) {
         // Calculate the Pokemon ID based on the starting index
         const pokemonId = startIndex + i + 1;
 
@@ -160,7 +292,7 @@
 
         // If a search term was entered, only show Pokemon that match the search term
         if (searchTerm && !pokemon.name.includes(searchTerm)) {
-        continue;
+          continue;
         }
 
         // Create element to display the Pokemon data
@@ -175,53 +307,53 @@
         //Kels Edit add event event click listener in every cell and then save the pokemon ID
         let pokemonData = pokemonId;
         pokemonElement.addEventListener('click', () => {
-            localStorage.setItem('pokemonId', pokemonId);
-            location.href = 'pokemonbattle.html';
+          localStorage.setItem('pokemonId', pokemonId);
+          location.href = 'pokemonbattle.html';
         });
 
         // Hover each pokemon it will appear left side
         pokemonElement.addEventListener('mouseover', () => {
-        const popup = document.createElement('div');
-        popup.classList.add('popup');
-        popup.innerHTML = `
+          const popup = document.createElement('div');
+          popup.classList.add('popup');
+          popup.innerHTML = `
             <div><img src="${pokemon.sprites.front_default}" alt="${pokemon.name}"></div>
             <div>Pokemon: ${pokemon.name}</div>
             <div>ID: ${pokemonId}</div>
             <div>Type: ${pokemon.types.map(type => type.type.name).join(', ')}</div>
             <div>Special Attack: ${pokemon.stats.find(stat => stat.stat.name === 'special-attack').base_stat}</div>
         `;
-        pokemonElement.appendChild(popup);
+          pokemonElement.appendChild(popup);
         });
         pokemonElement.addEventListener('mouseout', () => {
-        pokemonElement.querySelector('.popup').remove();
+          pokemonElement.querySelector('.popup').remove();
         });
 
         // Test
 
         // Append the Pokemon element to the container
         container.appendChild(pokemonElement);
-    }
+      }
 
-    // Disable the Previous button if on the first page
-    const previousButton = document.getElementById('previous-btn');
-    if (startIndex === 0) {
+      // Disable the Previous button if on the first page
+      const previousButton = document.getElementById('previous-btn');
+      if (startIndex === 0) {
         previousButton.disabled = true;
-    } else {
+      } else {
         previousButton.disabled = false;
-    }
+      }
 
-    // Add an event listener to the Previous button
-    previousButton.addEventListener('click', () => {
+      // Add an event listener to the Previous button
+      previousButton.addEventListener('click', () => {
         startIndex -= numberOfPokemon;
         fetchAndRenderPokemon();
-    });
+      });
 
-    // Add an event listener to the Next button
-    const nextButton = document.getElementById('next-btn');
-    nextButton.addEventListener('click', () => {
+      // Add an event listener to the Next button
+      const nextButton = document.getElementById('next-btn');
+      nextButton.addEventListener('click', () => {
         startIndex += numberOfPokemon;
         fetchAndRenderPokemon();
-    });
+      });
     }
 
     // Fetch and render the initial list of Pokemon
@@ -230,17 +362,53 @@
     // Add an event listener to the Search button
     const searchButton = document.getElementById('search-btn');
     searchButton.addEventListener('click', () => {
-    fetchAndRenderPokemon();
+      fetchAndRenderPokemon();
     });
 
     // Add an event listener to the Search input field to automatically search on Enter
     const searchInput = document.getElementById('search-input');
     searchInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
+      if (event.key === 'Enter') {
         fetchAndRenderPokemon();
-    }
+      }
     });
-    
-    </script>
+
+  </script>
+  <script>
+    function showLeaderboard() {
+      // Load the scores from localStorage
+      let scores = JSON.parse(localStorage.getItem('scores')) || [];
+      let userScore = JSON.parse(localStorage.getItem('userScore')) || 0;
+
+      // Sort the scores in descending order
+      scores.sort((a, b) => b.score - a.score);
+
+      // Clear the existing leaderboard table
+      let leaderboardBody = document.getElementById('leaderboard-body');
+      leaderboardBody.innerHTML = '';
+
+      // Populate the leaderboard table with the sorted scores
+      scores.forEach(score => {
+        let row = leaderboardBody.insertRow();
+        let nameCell = row.insertCell();
+        let scoreCell = row.insertCell();
+        nameCell.innerText = score.name;
+        scoreCell.innerText = score.score;
+      });
+
+      // Show the leaderboard
+      document.getElementById('leaderboard').style.display = 'block';
+    }
+
+    function hideLeaderboard() {
+      // Hide the leaderboard
+      document.getElementById('leaderboard').style.display = 'none';
+    }
+    function resetLocalStorage() {
+    localStorage.removeItem('scores');
+    alert('Local storage has been reset!');
+  }
+  </script>
 </body>
+
 </html>

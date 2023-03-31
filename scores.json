@@ -1,0 +1,44 @@
+{
+    "scores": [
+        {
+            "name": "John",
+            "score": 87
+        },
+        {
+            "name": "Sarah",
+            "score": 92
+        },
+        {
+            "name": "David",
+            "score": 78
+        },
+        {
+            "name": "Emily",
+            "score": 95
+        },
+        {
+            "name": "Michael",
+            "score": 83
+        },
+        {
+            "name": "Jessica",
+            "score": 88
+        },
+        {
+            "name": "Brian",
+            "score": 71
+        },
+        {
+            "name": "Jennifer",
+            "score": 90
+        },
+        {
+            "name": "Andrew",
+            "score": 81
+        },
+        {
+            "name": "Alexandra",
+            "score": 94
+        }
+    ]
+}

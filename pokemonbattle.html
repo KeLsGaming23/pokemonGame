@@ -188,12 +188,15 @@
     <script>
         //Declare Variables
         let turnInProgress = false;
-
+        let userScore = JSON.parse(localStorage.getItem('userScore')) || 0;
         // Retrieve player and opponent HP from localStorage
         let playerHP = localStorage.getItem("playerHP");
         let computerHP = localStorage.getItem("computerHP");
+        const currentPlayer = localStorage.getItem('currentPlayer');//retrieve player name
         // Retrieve player pokemon ID
         let playerPokemon = localStorage.getItem("pokemonId");
+        // Retrieve the existing scores from localStorage
+        let scores = JSON.parse(localStorage.getItem('scores')) || [];
         //Select HTML Elements
         const opponentPokemonName = document.getElementById('opponent-pokemon');
         let opponentProgressBar = document.getElementById('opponent-progress-bar');
@@ -228,6 +231,14 @@
         } else {
             opponentProgressBar.style.width = "100%";
         }
+        // Find the user's score by their name
+        for (let i = 0; i < scores.length; i++) {
+            if (scores[i].name === currentPlayer) {
+                userScore = scores[i].score;
+                break;
+            }
+        }
+        console.log(userScore);
         // Use fetch to retrieve information about the Opponent Pokemon
         fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon1Id}`)
             .then(response => response.json())
@@ -299,6 +310,17 @@
                             // Check if opponent HP has reached zero
                             if (newWidth <= 0) {
                                 opponentProgressBar.style.width = "0%";
+                                userScore++;
+                                userScore = parseInt(userScore);
+                                for (let i = 0; i < scores.length; i++) {
+                                    if (scores[i].name === currentPlayer) {
+                                        scores[i].score = userScore;
+                                        break;
+                                    }
+                                }
+                                // Save the updated scores to localStorage
+                                localStorage.setItem('scores', JSON.stringify(scores));
+                                console.log(userScore);
                                 //animate even if player wins
                                 document.getElementById('rival-pokemon').classList.add('damage-animation');
                                 damageAudio.play();
