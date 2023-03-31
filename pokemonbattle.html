@@ -314,6 +314,7 @@
                             } else {
                                 // Update the width of the progress bar
                                 opponentProgressBar.style.width = newWidth + "%";
+                                opponentProgressBar.innerHTML = newWidth + "%";
                                 document.getElementById('rival-pokemon').classList.add('damage-animation');
                                 damageAudio.play();
                                 turnInProgress = true;//make sure no double attack
@@ -381,6 +382,7 @@
                             } else {
                                 // Update the width of the progress bar
                                 playerProgressBar.style.width = playerNewWidth + "%";
+                                playerProgressBar.innerHTML = playerNewWidth + "%";
                                 document.getElementById('human-pokemon').classList.add('damage-animation');
                                 damageAudio.play();
                                 console.log(playerProgressBar);
