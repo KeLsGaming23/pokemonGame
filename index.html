@@ -8,12 +8,31 @@
   <!-- <link rel="stylesheet" href="style.css"> -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>PokeDexGo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f0f0f0;
     }
+
+    
+    @media screen and (max-width:982px) {
+        .hero-img {
+            width: 700px;
+        }
+    }
+    @media screen and (max-width:716px) {
+        .hero-img {
+            width: 500px;
+        }
+    }
+    @media screen and (max-width:516px) {
+        .hero-img {
+            width: 400px;
+        }
+    }
+
 
     #pokemon-container {
       display: flex;
@@ -73,18 +92,8 @@
     input[type="text"] {
       padding: 5px;
       margin-right: 10px;
-      width: 20%;
+      width: 25%;
     }
-
-    /* button {
-        padding: 5px;
-        cursor: pointer;
-      } */
-    /* .cell:hover {
-    cursor: pointer;
-    background-color: gray;
-    } */
-
     .popup {
       position: fixed;
       display: flex;
@@ -125,15 +134,25 @@
       background-color: #4CAF50;
       color: white;
     }
+
+    .fa-brands {
+      margin-right: 10px;
+    }
+
+    
   </style>
 </head>
 
 <body>
-  <center><img src="header.png" alt=""></center>
-  <button type="button" class="btn btn-primary" onclick="showLeaderboard()">Show Leaderboard</button>
-  <button type="button" class="btn btn-primary" onclick="hideLeaderboard()">Hide Leaderboard</button>
-  <button type="button" class="btn btn-primary" onclick="addScore()">Add Score</button>
-  <button class="btn btn-danger" onclick="resetLocalStorage()">Reset Local Storage</button>
+  <div class="social-links container" style="display: flex; padding: 10px; justify-content: flex-end;">
+    <i class="fa-brands fa-2x fa-facebook"></i> <i class="fa-brands fa-2x fa-linkedin"></i> <i class="fa-brands fa-2x fa-twitter"></i></i> <i class="fa-brands fa-2x fa-youtube"></i>
+  </div>
+  <center><img src="header.png" class="hero-img" alt=""><br>
+  <button type="button" class="btn btn-primary" onclick="showLeaderboard()">Show Leaderboard <i class="fa-solid fa-circle-chevron-down"></i></i></button>
+  <button type="button" class="btn btn-primary" onclick="hideLeaderboard()">Hide Leaderboard <i class="fa-solid fa-circle-chevron-up"></i></button>
+  <button type="button" class="btn btn-primary" onclick="addScore()">Add Score <i class="fa-solid fa-plus"></i></button>
+  <button class="btn btn-danger" onclick="resetLocalStorage()">Reset Local Storage <i class="fa-solid fa-power-off"></i></button>
+</center>
   <!-- Button to trigger the modal -->
   <button id="modalBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Login
@@ -151,7 +170,7 @@
   </div>
   <div class="pagination">
     <input type="text" id="search-input" placeholder="Search Pokemon...">
-    <button id="search-btn">Search</button>
+    <button id="search-btn">Search <i class="fa-solid fa-magnifying-glass"></i></button>
   </div>
   <div id="pokemon-container"></div>
   <div class="pagination">
@@ -163,7 +182,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Your Name</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Your Name</h1><br>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
