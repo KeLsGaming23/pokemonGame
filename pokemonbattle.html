@@ -12,21 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="shortcut icon" href="fav.ico" type="image/x-icon">
     <style>
-        /* #main {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-image: url('BG-Scene.png');
-            width: 400px;
-            height: 238px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        } */
-
         #main {
+            border: 5px solid black;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -44,13 +31,6 @@
             align-items: center;
         }
 
-        /* .opponent-side {
-            width: 25%;
-            position: absolute;
-            left: 44%;
-            top: 3%;
-            
-        } */
         .opponent-side {
             width: 25%;
             position: absolute;
@@ -59,12 +39,6 @@
             
         }
 
-        /* .player-side {
-            width: 35%;
-            position: absolute;
-            left: 10%;
-            top: 30%;
-        } */
         .player-side {
             width: 35%;
             position: absolute;
@@ -76,11 +50,19 @@
             transform: translateX(70%);
         }
 
+        #opponent-pokemon {
+            color: #fff;
+        }
+
+        #player-pokemon {
+            color: #fff;
+        }
+
         .move-set-holder {
             position: absolute;
             top: 40%;
             right: -150%;
-            width: 250px;
+            width: 350px;
             display: flex;
             align-items:end;
             flex-direction: row;
@@ -91,12 +73,12 @@
         }
 
         .box {
-            width: 100px;
+            width: 150px;
             background-color: black;
             color: #fff;
             display: flex;
             align-items: center;
-            height: 70px;
+            height: 60px;
             padding: 10px;
             cursor: pointer;
             margin: 2px;
@@ -121,7 +103,7 @@
             width: 300px;
             left: 20px;
             top: 120px;
-            background-color: rgba(28, 28, 28, 0.781);
+            background-color: rgba(255, 255, 255, 0.877);
             margin: auto;
             position: absolute;
             position: absolute;
@@ -131,7 +113,7 @@
             padding: 5px 0;
             text-align: center;
             border-radius: 5px;
-            color: white;
+            color: black;
             font-size: 1.5em;
         }
 
@@ -223,7 +205,6 @@
 
             </div>
             <div class="move-set-holder text-center border">
-                
                 <div id="first-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">1</div>
                 <div id="second-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(1)">2</div>
                 <div id="third-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(2)">3</div>
@@ -438,7 +419,7 @@
                                 damageMessage.innerHTML =
                                     `You Win
                                 <div>
-                                    <button id='button-end-game' class='btn btn-outline-light' onclick='resetGame()'>Play Again</button>
+                                    <button id='button-end-game' class='btn btn-outline-dark' onclick='resetGame()'>Play Again</button>
                                 </div>`;
                                 setTimeout(function () {
                                     victoryAudio.play();
@@ -510,7 +491,7 @@
                                 damageMessage.innerHTML =
                                     `You Lose
                                 <div>
-                                    <button id='button-end-game' class='btn btn-outline-light' onclick='resetGame()'>Play Again</button>
+                                    <button id='button-end-game' class='btn btn-outline-dark' onclick='resetGame()'>Play Again</button>
                                 </div>`;
                                 setTimeout(function () {
                                     loseAudio.play();
