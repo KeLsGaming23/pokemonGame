@@ -57,27 +57,73 @@
     }
 
     .pokemon {
-      display: flex;
+      /* display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 10px;
-      padding: 10px;
       background-color: #fff;
       border: 1px solid #ccc;
       border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+      width: 220px;
+      position: relative;
+      border-radius: 20px;
+      margin: 10px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
     }
 
-    .pokemon img {
-      width: 150px;
+    .pokemon .poster {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pokemon .poster::before {
+      content: '';
+      position: absolute;
+      bottom: -120px;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(0deg, #393938, 80%, transparent);
+      transition: 0.5s;
+      z-index: 1;
+    }
+
+    .pokemon:hover .poster::before {
+      bottom: 0px;
+    }
+
+    .pokemon .poster img {
+      width: 100%;
+      transition: 0.5s;
+      /* width: 150px; */
       height: 150px;
       margin-bottom: 10px;
+    }
+
+    .pokemon:hover .poster img {
+      /* transform: translateY(-50px); */
+      filter: blur(5px);
+    }
+
+    .pokemon .details {
+      color: white;
+      position: absolute;
+      bottom: -175px;
+      left: 0;
+      padding: 20px;
+      width: 100%;
+      z-index: 2;
+      transition: 0.5s;
+    }
+
+    .pokemon:hover .details {
+      bottom: 15px;
     }
 
     .pokemon h3 {
       margin: 0;
       font-size: 18px;
-      text-align: center;
+      /* text-align: center; */
       text-transform: capitalize;
     }
 
@@ -418,10 +464,15 @@
         const pokemonElement = document.createElement('div');
         pokemonElement.classList.add('pokemon');
         pokemonElement.innerHTML = `
-        <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
-        <h3>${pokemonId}. ${pokemon.name}</h3>
-        <p>Type: ${pokemon.types.map(type => type.type.name).join(', ')}</p>
-        
+        <div class="poster">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png" alt="${pokemon.name}">
+        </div>
+        <div class="details">
+          <h3>${pokemonId}. ${pokemon.name}</h3>
+          <p>Type: ${pokemon.types.map(type => type.type.name).join(', ')}</p>
+          <div>Type: ${pokemon.types.map(type => type.type.name).join(', ')}</div>
+          <div>Special Attack: ${pokemon.stats.find(stat => stat.stat.name === 'special-attack').base_stat}</div>
+        </div>
 
         `;
         //Kels Edit add event event click listener in every cell and then save the pokemon ID
@@ -436,7 +487,7 @@
           location.href = 'pokemonbattle.html';
         });
 
-        // Hover each pokemon it will appear left side
+        /* // Hover each pokemon it will appear left side
         pokemonElement.addEventListener('mouseover', () => {
           const popup = document.createElement('div');
           popup.classList.add('popup');
@@ -451,7 +502,7 @@
         });
         pokemonElement.addEventListener('mouseout', () => {
           pokemonElement.querySelector('.popup').remove();
-        });
+        }); */
 
 
         // Append the Pokemon element to the container
