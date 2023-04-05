@@ -373,6 +373,7 @@
       localStorage.setItem("username", newUsername);
       showLoggedIn();
       registerForm.style.display = "none";
+      localStorage.setItem("loggedIn", true);
     });
 
     //Retrieve playerPokemonFirst
