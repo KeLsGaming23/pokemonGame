@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="shortcut icon" href="fav.ico" type="image/x-icon">
     <style>
-        #main {
+        /* #main {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -24,29 +24,87 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+        } */
+
+        #main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-image: url('BG-Scene.png');
+            /* background-color: antiquewhite; */
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 950px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .opponent-side {
+        /* .opponent-side {
             width: 25%;
             position: absolute;
             left: 44%;
             top: 3%;
+            
+        } */
+        .opponent-side {
+            width: 25%;
+            position: absolute;
+            left: 44%;
+            top: 20%;
+            
         }
 
-        .player-side {
+        /* .player-side {
             width: 35%;
             position: absolute;
             left: 10%;
             top: 30%;
+        } */
+        .player-side {
+            width: 35%;
+            position: absolute;
+            left: 10%;
+            top: 45%;
         }
 
         .opponent-info {
-            transform: translateX(80%);
+            transform: translateX(70%);
         }
 
         .move-set-holder {
             position: absolute;
-            top: 90%;
+            top: 40%;
+            right: -150%;
+            width: 250px;
+            display: flex;
+            align-items:end;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+
+        }
+
+        .box {
+            width: 100px;
+            background-color: black;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            height: 70px;
+            padding: 10px;
+            cursor: pointer;
+            margin: 2px;
+            
+        }
+
+        .box:hover {
+            background-color: rgba(39, 38, 38, 0.507);
         }
 
         .pokemon-sprite {
@@ -59,21 +117,22 @@
         }
 
         .damage-message {
-            /* display: none; */
-            width: 400px;
+            display: none;
+            width: 300px;
+            left: 20px;
             top: 120px;
-            background-color: rgba(28, 28, 28, 0.925);
+            background-color: rgba(28, 28, 28, 0.781);
             margin: auto;
             position: absolute;
             position: absolute;
             /* top: 50%;
             left: 50%;
             transform: translate(-50%, -50%); */
-            padding: 20px 0;
+            padding: 5px 0;
             text-align: center;
             border-radius: 5px;
             color: white;
-            font-size: 2em;
+            font-size: 1.5em;
         }
 
         .hidden {
@@ -160,28 +219,43 @@
             </div>
             <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0"
                 aria-valuemax="100">
-                <div id="player-progress-bar" class="progress-bar bg-success" style="width: 100%">100%</div><br>
-                <div
-                    class="move-set-holder border p-4  mx-2 my-2 gap-2 d-md-flex justify-content-md-center align-items-center">
-                    <button id="first-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                        onclick="getAttack(0)"></button>
-                    <button id="second-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                        onclick="getAttack(1)"></button>
-                    <button id="third-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                        onclick="getAttack(2)"></button>
-                    <button id="fourth-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                        onclick="getAttack(3)"></button>
-                </div>
+                <div id="player-progress-bar" class="progress-bar bg-success" style="width: 100%">100%</div>
 
+            </div>
+            <div class="move-set-holder text-center border">
+                
+                <div id="first-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">1</div>
+                <div id="second-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(1)">2</div>
+                <div id="third-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(2)">3</div>
+                <div id="fourth-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(3)">4</div>
+
+                <!-- <table>
+                    <tr>
+                        <td id="first-moveset" class="cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">Hello</td>
+                        <td id="first-moveset" class="cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">Hello</td>
+                    </tr>
+                    <tr>
+                        <td id="first-moveset" class="cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">Hello</td>
+                        <td id="first-moveset" class="cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">Hello</td>
+                    </tr>
+                </table> -->
+                <!-- <button id="first-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
+                    onclick="getAttack(0)"></button>
+                <button id="second-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
+                    onclick="getAttack(1)"></button>
+                <button id="third-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
+                    onclick="getAttack(2)"></button>
+                <button id="fourth-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
+                    onclick="getAttack(3)"></button> -->
             </div>
             <div id="player-info" class="text-center">
 
             </div>
         </div>
+        <div id="damage-message" class="damage-message">
+            <p>Damage Logic Here!!</p>
+        </div>
     </main>
-    <div id="damage-message" class="damage-message">
-        <p>Damage Logic Here!!</p>
-    </div>
     <div>
         <audio id="background-audio">
             <source src="resistance-142554.mp3" type="audio/mpeg">
