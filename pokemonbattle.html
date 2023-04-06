@@ -202,7 +202,7 @@
         </div>
     </main>
     <!-- Test -->
-    <iframe style="display: none;" width="707" height="530" src="https://www.youtube.com/embed/yGR8d2PVp3I?rel=0&autoplay=1" title="Battle Music 1 - Dragon City" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe id="bgsound" style="display: none;" width="707" height="530" src="https://www.youtube.com/embed/yGR8d2PVp3I?rel=0&autoplay=1" title="Battle Music 1 - Dragon City" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     <div>
         <audio id="damage-audio">
             <source src="damage.mp3" type="audio/mpeg">
@@ -230,6 +230,10 @@
             battlefield.style.backgroundImage = Mode[Math.floor(Math.random()*6)];
             console.log( Mode[Math.floor(Math.random()*6)])
         }
+        // ------ Test -----------
+
+        // ----------------------
+        const bgsound = document.getElementById('bgsound');
         // ---------------------
         //Declare Variables
         let turnInProgress = false;
@@ -388,6 +392,7 @@
                                 <div>
                                     <button id='button-end-game' class='btn btn-outline-dark' onclick='resetGame()'>Play Again</button>
                                 </div>`;
+                                bgsound.src = "about:blank";
                                 setTimeout(function () {
                                     victoryAudio.play();
                                 }, 200);
@@ -460,6 +465,7 @@
                                 <div>
                                     <button id='button-end-game' class='btn btn-outline-dark' onclick='resetGame()'>Play Again</button>
                                 </div>`;
+                                bgsound.src = "about:blank";
                                 setTimeout(function () {
                                     loseAudio.play();
                                 }, 200);
