@@ -19,3 +19,21 @@
     </table>
 </body>
 </html>
+
+/* // Hover each pokemon it will appear left side
+pokemonElement.addEventListener('mouseover', () => {
+  const popup = document.createElement('div');
+  popup.classList.add('popup');
+  popup.innerHTML = `
+    <div><img src="${pokemon.sprites.front_default}" alt="${pokemon.name}"></div>
+    <div>Pokemon: ${pokemon.name}</div>
+    <div>ID: ${pokemonId}</div>
+    <div>Type: ${pokemon.types.map(type => type.type.name).join(', ')}</div>
+    <div>Special Attack: ${pokemon.stats.find(stat => stat.stat.name === 'special-attack').base_stat}</div>
+`;
+  pokemonElement.appendChild(popup);
+});
+pokemonElement.addEventListener('mouseout', () => {
+  pokemonElement.querySelector('.popup').remove();
+}); */
+
