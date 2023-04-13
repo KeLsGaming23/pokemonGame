@@ -57,19 +57,13 @@
     }
 
     .pokemon {
-      /* display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
       width: 220px;
       position: relative;
       border-radius: 20px;
       margin: 10px;
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      align-self: flex-start;
     }
 
     .pokemon .poster {
@@ -259,22 +253,6 @@
   <div class="container d-flex justify-content-center">
     <img src="header.png" class="hero-img" alt="Pokemon Showdown">
   </div>
-  <!-- <center><img src="header2.png" class="hero-img" alt=""><br></center> -->
-  <!-- <button type="button" class="btn btn-primary" onclick="showLeaderboard()">Show Leaderboard</button>
-  <button type="button" class="btn btn-primary" onclick="hideLeaderboard()">Hide Leaderboard</button>
-  <button type="button" class="btn btn-primary" onclick="addScore()">Add Score</button>
-  <button class="btn btn-danger" onclick="resetLocalStorage()">Reset Local Storage</button></center> -->
-
-  <!-- Leader Board -->
-  <!-- <div id="leaderboard" style="display: none">
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Score</th>
-      </tr>
-      <tbody id="leaderboard-body"></tbody>
-    </table>
-  </div> -->
   <!-- Search Engine -->
   <div class="pagination">
     <input type="text" id="search-input" placeholder="Search Pokemon...">
@@ -524,25 +502,6 @@
           localStorage.setItem('pokemonId', pokemonData);
           location.href = 'pokemonbattle.html';
         });
-
-        /* // Hover each pokemon it will appear left side
-        pokemonElement.addEventListener('mouseover', () => {
-          const popup = document.createElement('div');
-          popup.classList.add('popup');
-          popup.innerHTML = `
-            <div><img src="${pokemon.sprites.front_default}" alt="${pokemon.name}"></div>
-            <div>Pokemon: ${pokemon.name}</div>
-            <div>ID: ${pokemonId}</div>
-            <div>Type: ${pokemon.types.map(type => type.type.name).join(', ')}</div>
-            <div>Special Attack: ${pokemon.stats.find(stat => stat.stat.name === 'special-attack').base_stat}</div>
-        `;
-          pokemonElement.appendChild(popup);
-        });
-        pokemonElement.addEventListener('mouseout', () => {
-          pokemonElement.querySelector('.popup').remove();
-        }); */
-
-
         // Append the Pokemon element to the container
         container.appendChild(pokemonElement);
       }
