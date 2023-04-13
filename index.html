@@ -135,6 +135,8 @@
       background-color: #fff;
       border: 1px solid #ccc;
       height: fit-content;
+      display: flex;
+      flex-direction: column;
     }
 
     .pagination {
@@ -220,6 +222,11 @@
 
     .fa-brands {
       margin-right: 10px;
+      color: #393938;
+      transition: .3s;
+    }
+    .fa-brands:hover {
+      font-size: 50px;
     }
 
     /* Adding animation soon */
@@ -228,13 +235,26 @@
       padding: 10px;
       justify-content: flex-end;
     }
+
+    .developer {
+      color: black;
+      transition: .3s;
+      width: 100%;
+    }
+
+    .developer:hover {
+      background-color: #393938d0;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
 <body>
   <div class="social-links container">
-    <i class="fa-brands fa-2x fa-facebook"></i> <i class="fa-brands fa-2x fa-linkedin"></i> <i
-      class="fa-brands fa-2x fa-twitter"></i></i> <i class="fa-brands fa-2x fa-youtube"></i>
+    <a href="https://www.facebook.com/"><i class="fa-brands fa-2x fa-facebook"></i></a> <a href="https://www.linkedin.com/feed/"><i class="fa-brands fa-2x fa-linkedin"></i></a> <a href="https://twitter.com/"><i
+      class="fa-brands fa-2x fa-twitter"></i></a> <a href="https://www.youtube.com/"><i class="fa-brands fa-2x fa-youtube"></i></a>
   </div>
   <div class="container d-flex justify-content-center">
     <img src="header.png" class="hero-img" alt="Pokemon Showdown">
@@ -265,35 +285,40 @@
     <div id="pokemon-container"></div>
     <!-- Leaderboard -->
     <div class="right-container border p-4 my-4">
-      <div id="welcomeMessage"></div>
+      <div id="welcomeMessage" class="lead bold text-center"></div>
       <div id="loginButtons">
-        <button id="loginBtn">Login</button>
-        <button id="registerBtn">Register</button>
+        <button style="width: 100%;" class="btn btn-outline-secondary" id="loginBtn">Login</button>
+        <button style="width: 100%;" class="btn btn-outline-secondary text-center" id="registerBtn">Register</button>
       </div>
       <div id="logoutButton" style="display: none;">
-        <button id="logoutBtn">Logout</button>
+        <button style="width: 100%;" class="btn btn-outline-secondary" id="logoutBtn"><i class="fa-solid fa-power-off"></i> Logout</button>
       </div>
-      <form id="loginForm" method="POST" style="display: none;">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+      <!-- Login form -->
+      <form class="my-4" id="loginForm" method="POST" style="display: none;">
+        <p class="lead bolder"><i class="fa-solid fa-right-to-bracket"></i> LOGIN</p>
+        <label for="username" class="form-label">Username</label>
+        <input style="width: 100%;" type="text" class="form-control" id="username" name="username" required>
         <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
         <br>
-        <input type="submit" value="Login">
+        <input style="width: 100%;" type="submit" class="btn btn-outline-secondary" value="Login">
       </form>
-      <form id="registerForm" method="POST" style="display: none;">
-        <label for="newUsername">Username:</label>
-        <input type="text" id="newUsername" name="newUsername" required>
+      <!-- Registration Form -->
+      <form class="my-4" id="registerForm" method="POST" style="display: none;">
+        <p class="lead"><i class="fa-solid fa-user-plus"></i> REGISTER</p>
+        <label for="newUsername" class="form-label">Username</label>
+        <input style="width: 100%;" type="text" class="form-control" id="newUsername" name="newUsername" required>
         <br>
-        <label for="newPassword">Password:</label>
-        <input type="password" id="newPassword" name="newPassword" required>
+        <label for="newPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
         <br>
-        <input type="submit" value="Register">
+        <input style="width: 100%;" type="submit" class="btn btn-outline-secondary" value="Register">
       </form>
+      <hr>
       <h3>Leaderboard</h3>
       <div class="d-grid gap-2">
-        <button type="button" class="btn btn-primary" onclick="showLeaderboard()">Show Leaderboard </button>
+        <button type="button" class="btn btn-primary" onclick="showLeaderboard()">Show Leaderboard <i class="fa-solid fa-circle-down"></i></button>
         <!-- Leader Board -->
         <div id="leaderboard" style="display: none">
           <table>
@@ -304,7 +329,7 @@
             <tbody id="leaderboard-body"></tbody>
           </table>
         </div>
-        <button type="button" class="btn btn-primary" onclick="hideLeaderboard()">Hide Leaderboard </button>
+        <button type="button" class="btn btn-primary" onclick="hideLeaderboard()">Hide Leaderboard <i class="fa-solid fa-circle-up"></i></button>
         <button type="button" class="btn btn-primary" onclick="addScore()">Add Score <i
             class="fa-solid fa-plus"></i></button>
         <button class="btn btn-danger" onclick="resetLocalStorage()">Reset Local Storage <i
@@ -316,7 +341,7 @@
       <hr>
       <div class="top-pokemons">
         <h4>Top Pokemons</h4>
-        <button id="top-pokemon-name" class="btn btn-primary">Pokemon Name</button>
+        <button style="width: 100%;" id="top-pokemon-name" type="button" class="btn btn-primary">Pokemon Name</button>
         <table id="top-pokemon-table" style="display: none;">
           <thead>
             <tr>
@@ -326,6 +351,19 @@
           </thead>
           <tbody></tbody>
         </table>
+      </div>
+      <hr>
+      <div class="developers my-4">
+        <h3 class="text-center">Developers</h3>
+        <div class="d-flex developer align-items-center">
+          <img src="d-1.jpg" class="rounded-circle" width="70px" height="100%" alt="">
+          <p class="text-center my-2 mx-2 name-dev">Michael Alcoriza</p>
+        </div>
+        <br>
+        <div class="d-flex developer align-items-center">
+          <img src="d-2.jpg" class="rounded-circle" width="70px" height="100%" alt="">
+          <p class="text-center my-2 mx-2 name-dev">Ric Paquibot</p>
+        </div>
       </div>
     </div>
   </div>
@@ -424,9 +462,9 @@
 
     //Retrieve playerPokemonFirst
     let playerPokemon = localStorage.getItem("pokemonId");
-    // if (playerPokemon) {
-    //   location.href = "pokemonbattle.html";
-    // }
+    if (playerPokemon) {
+      location.href = "pokemonbattle.html";
+    }
     // Pokemons that will be render
     const numberOfPokemon = 40;
 
