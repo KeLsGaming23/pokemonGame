@@ -227,6 +227,7 @@
 
     .fa-brands:hover {
       font-size: 50px;
+      
     }
 
     /* Adding animation soon */
@@ -234,16 +235,18 @@
       display: flex;
       padding: 10px;
       justify-content: flex-end;
+      position: absolute;
     }
 
     .developer {
       color: black;
       transition: .3s;
+      padding: 3px;
       width: 100%;
     }
 
     .developer:hover {
-      background-color: #393938d0;
+      background-color: #00000085;
       color: white;
       border-radius: 5px;
       cursor: pointer;
@@ -252,7 +255,7 @@
 </head>
 
 <body>
-  <div class="social-links container">
+  <div class="social-links container-fluid">
     <a href="https://www.facebook.com/"><i class="fa-brands fa-2x fa-facebook"></i></a> <a
       href="https://www.linkedin.com/feed/"><i class="fa-brands fa-2x fa-linkedin"></i></a> <a
       href="https://twitter.com/"><i class="fa-brands fa-2x fa-twitter"></i></a> <a href="https://www.youtube.com/"><i
@@ -379,15 +382,16 @@
       <hr>
       <div class="developers my-4">
         <h3 class="text-center">Developers</h3>
-        <div class="d-flex developer align-items-center">
-          <img src="d-1.jpg" class="rounded-circle" width="70px" height="100%" alt="">
-          <p class="text-center my-2 mx-2 name-dev">Michael Alcoriza</p>
+          <a href="https://www.facebook.com/mykeLs23" class="d-flex developer align-items-center text-decoration-none">
+            <img src="d-1.jpg" class="rounded-circle" width="70px" height="100%" alt="">
+            <p class="text-center my-2 mx-2 name-dev">Michael Alcoriza</p>
+          </a>
         </div>
         <br>
-        <div class="d-flex developer align-items-center">
-          <img src="d-2.jpg" class="rounded-circle" width="70px" height="100%" alt="">
-          <p class="text-center my-2 mx-2 name-dev">Ric Paquibot</p>
-        </div>
+          <a href="https://www.facebook.com/ric2thiss" class="d-flex developer align-items-center text-decoration-none">
+            <img src="d-2.jpg" class="rounded-circle" width="70px" height="100%" alt="">
+            <p class="text-center my-2 mx-2 name-dev">Ric Paquibot</p>
+          </a>
       </div>
     </div>
   </div>

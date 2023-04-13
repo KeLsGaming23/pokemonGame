@@ -157,12 +157,38 @@
                 transform: rotate(8deg);
             }
         }
+        .map {
+            top: 2%;
+            right: 2%;
+            position: absolute;
+        }
+        .fa-solid {
+            font-size: 25px;
+            margin-right: 10px;
+            color: black;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .fa-solid:hover {
+            color: white;
+        }
+
+        .hero-img{
+            right: 0px;
+            width: 350px;
+            height: 100%;
+            position: absolute;
+        }
     </style>
 </head>
 
 <body>
-    <button class="text-center btn p-3 my-4 mx-4 btn-dark" onclick="darkmode()">Change Location</button>
+    <!-- <img class="hero-img" src="./Pokemon-Ash-Ketchum-PNG-Transparent-Image.png"> -->
     <main id="main" class="">
+       <div class="map">
+        <i class="fa-solid fa-map-location-dot" onclick="darkmode()"></i>
+       </div>
         <div class="opponent-side">
             <div class="container-xxl">
                 <h3 id="opponent-pokemon"></h3>
@@ -228,6 +254,8 @@
             console.log( Mode[Math.floor(Math.random()*6)])
         }
         // ------ Test -----------
+        
+
 
         // ----------------------
         const bgsound = document.getElementById('bgsound');
