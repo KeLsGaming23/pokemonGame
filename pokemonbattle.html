@@ -19,7 +19,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background-image: url('BG-Scene.png');
-            /* background-color: antiquewhite; */
             background-position: right;
             background-repeat: no-repeat;
             background-size: cover;
@@ -87,7 +86,7 @@
         }
 
         .box:hover {
-            background-color: rgba(39, 38, 38, 0.507);
+            background-color: rgba(39, 38, 38, 0.384);
         }
 
         .pokemon-sprite {
@@ -162,6 +161,7 @@
 </head>
 
 <body>
+    <button class="text-center btn p-3 my-4 mx-4 btn-dark" onclick="darkmode()">Change Location</button>
     <main id="main" class="">
         <div class="opponent-side">
             <div class="container-xxl">
@@ -189,25 +189,6 @@
                 <div id="second-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(1)">2</div>
                 <div id="third-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(2)">3</div>
                 <div id="fourth-moveset" class="box cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(3)">4</div>
-
-                <!-- <table>
-                    <tr>
-                        <td id="first-moveset" class="cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">Hello</td>
-                        <td id="first-moveset" class="cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">Hello</td>
-                    </tr>
-                    <tr>
-                        <td id="first-moveset" class="cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">Hello</td>
-                        <td id="first-moveset" class="cell btn border rounded-2 btn btn-dark p-3" onclick="getAttack(0)">Hello</td>
-                    </tr>
-                </table> -->
-                <!-- <button id="first-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                    onclick="getAttack(0)"></button>
-                <button id="second-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                    onclick="getAttack(1)"></button>
-                <button id="third-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                    onclick="getAttack(2)"></button>
-                <button id="fourth-moveset" class="cell btn border rounded-2 btn-lg btn-dark p-3"
-                    onclick="getAttack(3)"></button> -->
             </div>
             <div id="player-info" class="text-center">
 
@@ -217,6 +198,8 @@
             <p>Damage Logic Here!!</p>
         </div>
     </main>
+    <!-- Test -->
+    <iframe id="bgsound" style="display: none;" width="707" height="530" src="https://www.youtube.com/embed/yGR8d2PVp3I?rel=0&autoplay=1" title="Battle Music 1 - Dragon City" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     <div>
         <audio id="damage-audio">
             <source src="damage.mp3" type="audio/mpeg">
@@ -237,6 +220,18 @@
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
         crossorigin="anonymous"></script>
     <script>
+        // ----- Test ----------
+        const battlefield = document.getElementById('main');
+        const Mode = ["url('bgc-1.png')","url('bgc-2.png')", "url('bgc-3.png')","url('BG-Scene.png')","url('bgc-4.png')","url('bgc-5.png')"]
+        function darkmode(){
+            battlefield.style.backgroundImage = Mode[Math.floor(Math.random()*6)];
+            console.log( Mode[Math.floor(Math.random()*6)])
+        }
+        // ------ Test -----------
+
+        // ----------------------
+        const bgsound = document.getElementById('bgsound');
+        // ---------------------
         //Declare Variables
         let turnInProgress = false;
         const username = localStorage.getItem("username");
@@ -394,6 +389,7 @@
                                 <div>
                                     <button id='button-end-game' class='btn btn-outline-dark' onclick='resetGame()'>Play Again</button>
                                 </div>`;
+                                bgsound.src = "about:blank";
                                 setTimeout(function () {
                                     victoryAudio.play();
                                 }, 200);
@@ -466,6 +462,7 @@
                                 <div>
                                     <button id='button-end-game' class='btn btn-outline-dark' onclick='resetGame()'>Play Again</button>
                                 </div>`;
+                                bgsound.src = "about:blank";
                                 setTimeout(function () {
                                     loseAudio.play();
                                 }, 200);
