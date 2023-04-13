@@ -64,6 +64,10 @@
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
       align-self: flex-start;
+      transition: 0.5s;
+    }
+    .pokemon:hover{
+      transform: scale(150%);
     }
 
     .pokemon .poster {
@@ -308,12 +312,6 @@
           </table>
         </div>
         <button type="button" class="btn btn-primary" onclick="hideLeaderboard()">Hide Leaderboard <i class="fa-solid fa-circle-up"></i></button>
-        <!-- <button type="button" class="btn btn-primary" onclick="addScore()">Add Score <i
-            class="fa-solid fa-plus"></i></button>
-        <button class="btn btn-danger" onclick="resetLocalStorage()">Reset Local Storage <i
-            class="fa-solid fa-power-off"></i></button> -->
-        <!-- <button class="btn btn-primary" type="button">Button</button>
-            <button class="btn btn-primary" type="button">Button</button> -->
       </div>
       <br>
       <hr>
